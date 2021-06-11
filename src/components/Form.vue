@@ -38,6 +38,7 @@
 
       <div>Номер телефона*</div>
       <input type="text"
+             placeholder="Номер начинается с 7"
              v-model="phone"
              @input="$v.phone.$touch()"
              :class="{invalid: ($v.phone.$dirty && !$v.phone.required) || ($v.phone.$dirty && !$v.phone.alpha)}">
@@ -165,7 +166,7 @@
   </form>
 </template>
 <script>
-import {required,numeric} from 'vuelidate/lib/validators'
+import {required} from 'vuelidate/lib/validators'
 export default {
   name: 'forms',
   data() {
@@ -197,7 +198,7 @@ export default {
     surname: {required,alpha: val => /^[а-яё]*$/i.test(val)},
     name: {required,alpha: val => /^[а-яё]*$/i.test(val)},
     patronymic: {alpha: val => /^[а-яё]*$/i.test(val)},
-    dateOfBirth: {required, numeric},
+    dateOfBirth: {required},
     phone:{required,alpha: val => /^[7]\d{3}-?\d{3}-?\d{2}-?\d{2}$/.test(val)},
     gendere:{},
     customerGroup:{required},
@@ -230,9 +231,6 @@ export default {
 .Attributes{
   width: 200px;
   display: grid;
-
-;
-
 }
 .Address{
   width: 200px;
@@ -245,7 +243,4 @@ export default {
 .pattern{
   color: red;
 }
-.invalid{
-  color: blue;
-  }
 </style>
